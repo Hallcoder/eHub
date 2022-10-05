@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities{
+  
+  .grid{
+    grid-template-columns: repeat(3,30vh);
+    grid-template-rows: repeat(2,35vw);
+    grid-template-areas:
+    "1 3 4",
+    "1 3 4";
+    grid-gap: 10px;
+  };
+
+  .item1{
+    grid-template-area: 1;
+   }
+  .item2{
+    grid-template-area: 2;
+   }
+  .item3{
+    grid-template-area: 3;
+   }
+  .item4{
+    grid-template-area: 4;
+   }
+
+}
