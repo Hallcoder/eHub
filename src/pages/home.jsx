@@ -3,6 +3,7 @@ import Intro from "../components/intro";
 import NavBar from "../components/navbar";
 import ProductCard from "../components/productCard";
 function HomePage() {
+  const headerClass = "text-center font-bold text-4xl m-10"
   return (
     <div>
       <NavBar />
@@ -10,7 +11,7 @@ function HomePage() {
         <Intro />
       </section>
       <section className="">
-        <h1 className="text-center font-bold text-4xl m-10">Trending Products</h1>
+        <h1 className={headerClass}>Trending Products</h1>
         <div className="items-center justify-center flex flex-wrap w-11/12 gap-2 m-auto">
             <ProductCard/>
             <ProductCard/>
@@ -19,12 +20,12 @@ function HomePage() {
         </div>
       </section>
       <section>
-        <h1>Categories</h1>
-        <div className="grid border-2 border-gray-400 m-2">
-         <ProductCard className='item1'/>
-         <ProductCard className='item2'/>
-         <ProductCard className='item3'/>
-         <ProductCard className='item4'/>
+        <h1 className={headerClass}>Categories</h1>
+        <div className="gridCustom shadow-md">
+         <ProductCard className='item1 flex flex-col shadow-xl border items-center justify-around'/>
+         <ProductCard className='item2 flex flex-col shadow-xl border items-center justify-around'/>
+         <ProductCard className='item3 flex flex-col shadow-xl border items-center justify-around'/>
+         <ProductCard className='item4 flex flex-col shadow-xl border items-center justify-around'/>
         </div>
       </section>
     </div>
