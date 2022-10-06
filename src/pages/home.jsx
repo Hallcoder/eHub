@@ -12,7 +12,7 @@ function HomePage() {
       </section>
       <section className="">
         <h1 className={headerClass}>Trending Products</h1>
-        <div className="items-center justify-center flex flex-wrap w-11/12 gap-2 m-auto">
+        <div className="items-center justify-center flex flex-wrap w-11/12 gap-4 m-auto">
             <ProductCard/>
             <ProductCard/>
             <ProductCard/>
@@ -21,7 +21,7 @@ function HomePage() {
       </section>
       <section>
         <h1 className={headerClass}>Categories</h1>
-        <div className="gridCustom shadow-md">
+        <div className="sm:gridCustom flex flex-col gap-4 items-center justify-center shadow-md">
          <ProductCard className='item1 flex flex-col shadow-xl border items-center justify-around'/>
          <ProductCard className='item2 flex flex-col shadow-xl border items-center justify-around'/>
          <ProductCard className='item3 flex flex-col shadow-xl border items-center justify-around'/>
