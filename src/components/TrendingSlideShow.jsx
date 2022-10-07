@@ -41,11 +41,10 @@ useEffect(()=>{
     }
 },[currentSlide])
 return ( 
-        <div className='slide m-auto border h-[50vh] '>
+        <div className='slide m-auto border h-[50vh]'>
             <SlideShow images={images} currentSlide={currentSlide}/>
-            <MdArrowForwardIos  onClick={() => handleAction('next')} className='absolute top-[40%] hover:flex peer-hover:flex left-[85.5%] hidden text-white bg-opacity-40 h-12 w-8  bg-black'/>
-            <MdArrowBackIosNew  onClick={() => handleAction('previous')} className='absolute top-[45%] hover:flex peer-hover:flex hidden text-white bg-opacity-40 h-12 w-8 bg-black' />
-            {/* <Dots /> */}
+            <MdArrowForwardIos  onClick={() => handleAction('next')} className='absolute top-[35%] hover:flex peer-hover:flex left-[89.5%] hidden text-white bg-opacity-40 h-12 w-8  bg-black'/>
+            <MdArrowBackIosNew  onClick={() => handleAction('previous')} className='absolute top-[35%] hover:flex peer-hover:flex hidden text-white bg-opacity-40 h-12 w-8 bg-black' />
         </div>
      );
 }

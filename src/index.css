@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 @layer utilities {
+*{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
   .gridCustom{
     display: grid;
     justify-content: center;

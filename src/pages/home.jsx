@@ -21,11 +21,11 @@ function HomePage() {
       </section>
       <section>
         <h1 className={headerClass}>Categories</h1>
-        <div className="sm:gridCustom flex flex-col gap-4 items-center justify-center shadow-md">
-         <ProductCard className='item1 flex flex-col shadow-xl border items-center justify-around'/>
-         <ProductCard className='item2 flex flex-col shadow-xl border items-center justify-around'/>
-         <ProductCard className='item3 flex flex-col shadow-xl border items-center justify-around'/>
-         <ProductCard className='item4 flex flex-col shadow-xl border items-center justify-around'/>
+        <div className="sm:gridCustom flex flex-col gap-4  justify-center">
+         <ProductCard className='item1 flex flex-col shadow-xl border  justify-around'/>
+         <ProductCard className='item2 flex flex-col shadow-xl border  justify-around'/>
+         <ProductCard className='item3 flex flex-col shadow-xl border  justify-around'/>
+         <ProductCard className='item4 flex flex-col shadow-xl border  justify-around'/>
         </div>
       </section>
     </div>
