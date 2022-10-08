@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import {MdMenu,MdOutlineShoppingCart} from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import Cart from './Cart';
 import Input from './input';
 function NavBar() {
 const [style,setStyle] = useState({
     display:'none'
-})
+});
+const navigate = useNavigate();
 const handleShowCart = () => {
     if(style.display == 'none'){
         setStyle({display:'flex'});
@@ -27,7 +29,7 @@ const iconClass = 'text-2xl'
         <MdMenu className={iconClass}/>
             </div>
             <div>
-                <button className='bg-blue-600 px-4 py-2 rounded-ms text-white'>Post</button>
+                <button className='bg-blue-600 px-4 py-2 rounded-ms text-white' onClick={() => navigate('/postProduct')}>Post</button>
             </div>
             <div className='sm:flex hidden'>
             <MdOutlineShoppingCart className={iconClass} onClick={handleShowCart}/>
