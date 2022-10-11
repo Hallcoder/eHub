@@ -19,10 +19,9 @@ function HomePage() {
     const query = '*[_type == "product" ]'
     client.fetch(query,{})
     .then(res => {
-      console.log(res);
+      console.log(res[0].productImage.asset._ref);
       if(res.length !== 0){
         localStorage.setItem('products',JSON.stringify(res));
-        consoleognsnsd=n
         setProducts(res);
       }
     })
@@ -37,7 +36,7 @@ function HomePage() {
         <h1 className={headerClass}>Trending Products</h1>
         <div className="items-center justify-center flex flex-wrap w-11/12 gap-4 m-auto">
             { JSON.parse(localStorage.getItem('products')).map(prod => {
-              return <ProductCard  productName={prod.productName} image={prod.productImage.asset._ref}/>
+              return <ProductCard  productName={prod.productName} image={prod.productImage.asset._ref }/>
             })}
         </div>
       </section>
