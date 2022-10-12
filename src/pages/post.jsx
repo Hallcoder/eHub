@@ -28,19 +28,6 @@ function PostProduct() {
       "skmaNHDkHW2IJm5vBl7SHnnG9Xmh4I8WlZXDNb2gjSrWMYrc14quhXVV7v3R686l6FqhpPxGHkrkROLFfh8i1J2XXU9TOxASs8Yg1RS6ybQkfZVyWiaRYsjOIxy1WfiLcKjihuLrgyZnFVFKhCJWFrBy60V0QY7eziyER2CywUhxUlqAZlBY",
     useCdn: false,
   });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const doc = {
-      _type: "document",
-      ...product,
-      // productImage: image,
-    };
-    client.create(doc).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err.details[0])
-    })
-  };
   return (
     <div>
       <NavBar />

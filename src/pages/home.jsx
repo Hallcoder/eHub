@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Intro from "../components/intro";
 import NavBar from "../components/navbar";
-import sanityClient from "@sanity/client";
 import ProductCard from "../components/productCard";
-
+import CategoryCard from "../components/CategoryCard";
+import {buildImage, client} from '../constants';
 function HomePage() {
   const headerClass = "text-center font-bold text-4xl m-10";
   const  [products,setProducts] = useState();
+  const  [categories,setCategories] = useState();
+
   useEffect(() =>{
-    const client = sanityClient({
-      projectId: "gh8jlhht",
-      dataset: "production",
-      apiVersion: 1,
-      token:
-        "skmaNHDkHW2IJm5vBl7SHnnG9Xmh4I8WlZXDNb2gjSrWMYrc14quhXVV7v3R686l6FqhpPxGHkrkROLFfh8i1J2XXU9TOxASs8Yg1RS6ybQkfZVyWiaRYsjOIxy1WfiLcKjihuLrgyZnFVFKhCJWFrBy60V0QY7eziyER2CywUhxUlqAZlBY",
-      useCdn: false,
-    });
-    const query = '*[_type == "product" ]'
-    client.fetch(query,{})
+    const Pquery = '*[_type == "product" ]';
+    const Cquery= '*[_type == "category" ]';
+    client.fetch(Pquery,{})
     .then(res => {
-      console.log(res[0].productImage.asset._ref);
       if(res.length !== 0){
         localStorage.setItem('products',JSON.stringify(res));
         setProducts(res);
       }
     })
+
+    client.fetch(Cquery,{})
+    .then(res => {
+      if(res.length !== 0 ){
+        localStorage.setItem('categories',JSON.stringify(res));
+        setCategories(res);
+      }
+    })
     },[]);
+   
   return (
     <div>
       <NavBar />
@@ -36,17 +39,16 @@ function HomePage() {
         <h1 className={headerClass}>Trending Products</h1>
         <div className="items-center justify-center flex flex-wrap w-11/12 gap-4 m-auto">
             { JSON.parse(localStorage.getItem('products')).map(prod => {
-              return <ProductCard  productName={prod.productName} image={prod.productImage.asset._ref }/>
+              return <ProductCard  productName={prod.productName} image={buildImage(prod.productImage.asset._ref).url()} id={prod._id}/>
             })}
         </div>
       </section>
       <section>
         <h1 className={headerClass}>Categories</h1>
-        <div className="sm:gridCustom flex flex-col gap-4  justify-center">
-         <ProductCard className='item1 flex flex-col shadow-xl border  justify-around'/>
-         <ProductCard className='item2 flex flex-col shadow-xl border  justify-around'/>
-         <ProductCard className='item3 flex flex-col shadow-xl border  justify-around'/>
-         <ProductCard className='item4 flex flex-col shadow-xl border  justify-around'/>
+        <div className=" flex  gap-4 justify-center mb-20">
+        { JSON.parse(localStorage.getItem('categories')).map((cat,i) => {
+              return <CategoryCard  categoryName={cat.categoryName} image={buildImage(cat.categoryImage.asset._ref).url()}/>
+            })}
         </div>
       </section>
     </div>

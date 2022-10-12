@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import prof from "../assets/images/4th.jfif";
-function ProductCard({className,productName,image}){
+function ProductCard({className,productName,image,id}){
   const navigate = useNavigate();
-  console.log(className);
+  useEffect(() => {
+   
+  },[])
   return(
-    <div className={className ? className :"rounded-md hover:scale-105 bg-white border justify-around min-h-[50vh] shadow-2xl flex flex-col" }>
+    <div className={className ? className :"rounded-md w-[20vw] hover:scale-105  bg-white border justify-around min-h-[50vh] shadow-2xl flex flex-col" }>
+      <div className="w-full h-full"><img src={image} alt="product" className="w-10/12 h-full m-auto mt-4" /></div>
       <h1 className="font-bold text-center text-black">{productName}</h1>
-      <div className="w-full"><img src={prof} alt="" /></div>
+
       <div className="flex border w-11/12 m-auto  items-center justify-between">
         <div className='flex justify-around'>
           <img src={prof} alt="" className="h-10 w-10 rounded-full" />
@@ -20,7 +23,7 @@ function ProductCard({className,productName,image}){
           <h4 className="text-red-500 line-through">Sold</h4>
           </div>
         <div>
-          <button onClick={() => navigate('/product/13dch')} className="bg-blue-600 text-white p-2 rounded-sm">Show Deal</button>
+          <button onClick={() => navigate(`/product/${id}`)} className="bg-blue-600 text-white p-2 rounded-sm">Show Deal</button>
           </div>
       </div>
     </div>
