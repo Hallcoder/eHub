@@ -1,13 +1,18 @@
-import builder from "@sanity/image-url";
+import * as actions from '../redux/actionTypes';
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
+import {BsCartPlus} from 'react-icons/bs';
 import NavBar from "../components/navbar";
 import { AllQuery, buildImage, client, headerClass } from "../constants";
 import ProductCard from './../components/productCard';
+import { useDispatch } from "react-redux";
+import { createAction } from "../redux/actionCreator";
 function ProductPage() {
   const buttonClass = "bg-blue-600 p-2 text-white m-1 font-bold";
   const params = useParams();
+  const dispatch = useDispatch();
+  const [isInCart,setIsInCart] = useState(false);
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -21,6 +26,18 @@ function ProductPage() {
     }
     )
   },[]);
+  const handleAddToCart =  () => {
+    dispatch(createAction(actions.ADD_CART,{
+      product,
+    }));
+    setIsInCart(!isInCart);
+  }
+  const handleRemoveCart = () => {
+    dispatch(createAction(actions.REMOVE_CART,{
+        product
+    }));
+    setIsInCart(!isInCart);
+  }
   {
     return Object.values(product).length !== 0 ? (
       <div className="min-h-screen">
@@ -46,7 +63,7 @@ function ProductPage() {
                 <h3 className="font-semibold indent-4">{'$'.concat(product.productPrice)}</h3>
             </div>
             <div className="m-auto w-10/12 flex justify-center">
-              <button className={buttonClass}>Add Cart</button>
+              {!isInCart ? <button className={buttonClass} onClick={() => handleAddToCart()}>Add Cart</button>:<button className={'bg-red-600 p-2 text-white m-1 font-bold'} onClick={() => handleRemoveCart()}>Remove</button>}
               <button className={buttonClass}>Order</button>
             </div>
           </div>
@@ -56,7 +73,7 @@ function ProductPage() {
          {
           products.length !== 0 ? <div className="flex gap-4 sm:flex-row flex-col justify-center items-center">
             {products.map(prod => {
-            return   <ProductCard key={prod._id} productName={prod.productName} productImage={buildImage(prod.productImage.asset._ref)} id={prod._id}/>
+            return   <ProductCard key={prod._id} productName={prod.productName} image={buildImage(prod.productImage.asset._ref)} id={prod._id}/>
             })}
           </div>:  <Audio
           height="80"
