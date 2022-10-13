@@ -13,3 +13,6 @@ export const client = sanityClient({
  export function buildImage(source){
     return builder.image(source);
   }
+
+export const AllQuery = '*[_type =="product"]';
+export const headerClass = "text-center font-bold text-4xl m-10";

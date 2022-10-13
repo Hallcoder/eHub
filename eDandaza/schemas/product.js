@@ -22,6 +22,12 @@ export default {
         validation : Rule => Rule.required()
       },
       {
+       title:'Category',
+       name:'productCategory',
+       type:'string',
+       validation: Rule => Rule.required()
+      },
+      {
         title:'Description',
         name:'productDescription',
         type:'string',

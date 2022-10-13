@@ -3,19 +3,24 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
 import NavBar from "../components/navbar";
-import { buildImage, client } from "../constants";
+import { AllQuery, buildImage, client, headerClass } from "../constants";
+import ProductCard from './../components/productCard';
 function ProductPage() {
   const buttonClass = "bg-blue-600 p-2 text-white m-1 font-bold";
   const params = useParams();
   const [product, setProduct] = useState({});
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     const query = `*[_type == "product" && _id == "${params.id}" ]`;
      client.fetch(query, {}).then(res => {
-      console.log("product", res[0]);
       setProduct(res[0]);
     });
+    client.fetch(AllQuery).then(res => {
+    console.log(res)
+    setProducts(res);
+    }
+    )
   },[]);
-      console.log("product", product);
   {
     return Object.values(product).length !== 0 ? (
       <div className="min-h-screen">
@@ -47,7 +52,22 @@ function ProductPage() {
           </div>
         </div>
         <div>
-          <h1>Related Products</h1>
+          <h1 className={headerClass}>Related Products</h1>
+         {
+          products.length !== 0 ? <div className="flex gap-4 sm:flex-row flex-col justify-center items-center">
+            {products.map(prod => {
+            return   <ProductCard key={prod._id} productName={prod.productName} productImage={buildImage(prod.productImage.asset._ref)} id={prod._id}/>
+            })}
+          </div>:  <Audio
+          height="80"
+          width="80"
+          radius="9"
+          color="blue"
+          ariaLabel="loading"
+          wrapperStyle
+          wrapperClass
+        />
+         }
         </div>
       </div>
     ) : (

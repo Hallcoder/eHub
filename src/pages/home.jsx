@@ -3,9 +3,8 @@ import Intro from "../components/intro";
 import NavBar from "../components/navbar";
 import ProductCard from "../components/productCard";
 import CategoryCard from "../components/CategoryCard";
-import {buildImage, client} from '../constants';
+import {buildImage, client, headerClass} from '../constants';
 function HomePage() {
-  const headerClass = "text-center font-bold text-4xl m-10";
   const  [products,setProducts] = useState();
   const  [categories,setCategories] = useState();
 
