@@ -2,6 +2,7 @@ import * as actions from "./actionTypes";
 
 export default function Reducer(state = { products: [] }, action) {
   let cState = { ...state };
+  let product;
   switch (action.type) {
     case actions.ADD_CART:
       action.payLoad.quantity = 0;
@@ -18,9 +19,15 @@ export default function Reducer(state = { products: [] }, action) {
      return cState;
     case actions.INCREASE:
       console.log("Increasing");
-      break;
+       product = cState.products.find(p => p.product._id == action.payLoad.id);
+      product.quantity++;
+      return cState;
     case actions.DECREASE:
       console.log("Decreasing");
-      break;
+       product = cState.products.find(p => p.product._id == action.payLoad.id);
+      product.quantity--;
+      return cState;
+    default:
+        return cState;
   }
 }

@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Counter from "./counter";
-function Item() {
-  return <div className="flex w-full justify-around items-center h-16 rounded-sm shadow-md">
+import * as actions from '../redux/actionTypes';
+import { createAction } from './../redux/actionCreator';
+function Item({name,quantity,price,id}) {
+  const [qty,setQuantity] = useState(0);
+  const dispatch = useDispatch();
+  useEffect(() => {
+      setQuantity(quantity);
+  },[])
+  const increase  = () => {
+    setQuantity(++quantity);
+    dispatch(createAction(actions.INCREASE,{id}));
+  }
+  const decrease  = () => {
+    if(quantity <= 0) return;
+    setQuantity(--quantity);
+    dispatch(createAction(actions.DECREASE,{id}));
+  }
+  return <div className="flex w-full justify-between items-center h-16 rounded-sm shadow-md">
    <img src="" alt="" />
-   <h3>Product Name</h3>
-   <Counter />
-   <h2>4</h2>
-   <h4>$199.99</h4>
+   <h3>{name}</h3>
+   <Counter increase={increase} decrease={decrease} qty={qty}/>
+   <h4>{price * qty}</h4>
   </div>;
 }
 

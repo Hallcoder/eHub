@@ -47,7 +47,7 @@ function ProductPage() {
  ] rounded-md m-auto"
         >
           <div>
-            <img src={buildImage(product.productImage.asset._ref).url()} alt="" />
+            <img src={buildImage(product.productImage.asset._ref).url()} alt="" className="ml-2 mt-2" />
           </div>
           <div className="w-full m-4 flex flex-col justify-start">
             <h1 className="font-bold m-2">

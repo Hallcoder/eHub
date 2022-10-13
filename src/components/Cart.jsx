@@ -2,24 +2,27 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Item from "./Item";
 function Cart() {
-  let cart = useSelector(state => state.products);
-  console.log(cart);
-
+  let cart = useSelector(state => state);
+  console.log(cart.products);
   return (
-    <div className="w-full flex flex-col text-xs bg-white h-full overflow-scroll">
+    <div className="w-full flex flex-col text-xs bg-white h-full shadow-2xl z-[1] overflow-scroll">
       <h1 className="text-lg  text-center font-bold">My Cart</h1>
-      {cart.products.length !== 0 &&
+      {cart &&
+        cart.products.length !== 0 &&
         cart.products.map(pr => {
-          return <Item />;
+          console.log(pr);
+          return (
+            <Item
+              price={pr.product.productPrice}
+              name={pr.product.productName}
+              quantity={pr.quantity}
+              id={pr.product._id}
+            />
+          );
         })}
-      <h3>No items are in the Cart!</h3>
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
+      {cart.products.length == 0 && (
+        <h3 className="mt-[50%] m-auto text-xl">No items are in the Cart!</h3>
+      )}
     </div>
   );
 }
