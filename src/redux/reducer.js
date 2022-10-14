@@ -1,11 +1,12 @@
 import * as actions from "./actionTypes";
 
-export default function Reducer(state = { products: [] }, action) {
+export default function Reducer(state = { products:[] }, action) {
   let cState = { ...state };
   let product;
   switch (action.type) {
     case actions.ADD_CART:
       action.payLoad.quantity = 0;
+      action.payLoad.isInCart = true;
       console.log("Added to Cart..");
       +(action.payLoad.quantity)++;
       cState.products.push(action.payLoad);
@@ -24,7 +25,7 @@ export default function Reducer(state = { products: [] }, action) {
       return cState;
     case actions.DECREASE:
       console.log("Decreasing");
-       product = cState.products.find(p => p.product._id == action.payLoad.id);
+      product = cState.products.find(p => p.product._id == action.payLoad.id);
       product.quantity--;
       return cState;
     default:

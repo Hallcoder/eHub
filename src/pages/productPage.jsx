@@ -19,6 +19,7 @@ function ProductPage() {
     const query = `*[_type == "product" && _id == "${params.id}" ]`;
      client.fetch(query, {}).then(res => {
       setProduct(res[0]);
+      setIsInCart(product.isInCart);
     });
     client.fetch(AllQuery).then(res => {
     console.log(res)
@@ -71,9 +72,9 @@ function ProductPage() {
         <div>
           <h1 className={headerClass}>Related Products</h1>
          {
-          products.length !== 0 ? <div className="flex gap-4 sm:flex-row flex-col justify-center items-center">
-            {products.map(prod => {
-            return   <ProductCard key={prod._id} productName={prod.productName} image={buildImage(prod.productImage.asset._ref)} id={prod._id}/>
+          products.length !== 0 ? <div className="flex flex-wrap gap-4 sm:flex-row flex-col justify-center items-center">
+            {products.filter(p => p._id !== params.id).map(prod => {
+            return   <ProductCard key={prod._id} productName={prod.productName} image={buildImage(prod.productImage.asset._ref)} id={prod._id} manufacturer={prod .manufacturer}/>
             })}
           </div>:  <Audio
           height="80"

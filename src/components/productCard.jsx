@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ED from "../assets/images/ED.png";
-function ProductCard({className,productName,image,id}){
+function ProductCard({className,productName,image,id,manufacturer}){
   const navigate = useNavigate();
   useEffect(() => {
    
   },[])
   return(
-    <div className={className ? className :"rounded-md w-[20vw] hover:scale-105  bg-white border justify-around min-h-[50vh] shadow-2xl flex flex-col" }>
+    <div className={className ? className :"rounded-md w-[20vw] hover:scale-105 min-w-fit bg-white border justify-around min-h-[50vh] shadow-2xl flex flex-col" }>
       <div className="w-full h-full"><img src={image} alt="product" className="w-10/12 h-full m-auto mt-4" /></div>
       <h1 className="font-bold text-center text-black">{productName}</h1>
 
@@ -15,7 +15,7 @@ function ProductCard({className,productName,image,id}){
         <div className='flex justify-around'>
           <img src={ED} alt="" className="h-10 w-10 rounded-full" />
           <div className="flex flex-col">
-            <h1 className="text-sm font-bold">Apple</h1>
+            <h1 className="text-sm font-bold">{manufacturer}</h1>
             <h5 className="text-xs text-gray-400">Posted on Sat 18th</h5>
           </div>
         </div>

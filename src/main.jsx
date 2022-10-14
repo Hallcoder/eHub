@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <PersistGate persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor}>
           <Routes>
             <Route index element={<HomePage />}></Route>
             <Route path="/product/:id" element={<ProductPage />}></Route>

@@ -33,5 +33,11 @@ export default {
         type:'string',
         validation : Rule => Rule.required()
       },
+      {
+        title:'Manufacturer',
+        name:"manufacturer",
+        type:"string",
+        validation:  Rule => Rule.required()
+      }
     ]
 }
