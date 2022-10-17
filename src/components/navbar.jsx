@@ -22,7 +22,7 @@ function NavBar() {
     return;
       }
   const handleShowCart = () => {
-    if (sh.display == "none") {
+    if (style.display == "none") {
       setStyle({ display: "flex" });
       return;
     }

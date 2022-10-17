@@ -10,7 +10,6 @@ import { Provider } from "react-redux";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <Router>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -21,6 +20,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           </Routes>
         </PersistGate>
       </Provider>
-    </Router>
-  </React.StrictMode>
+    </Router> 
 );
