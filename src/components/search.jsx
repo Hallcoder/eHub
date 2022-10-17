@@ -8,7 +8,8 @@ import {
 } from "react-instantsearch-dom";
 import { MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { AllQuery, client } from "../constants";
+import { AllQuery, buildImage, client } from "../constants";
+import builder from "@sanity/image-url";
 
 function Search({ hide }) {
   const navigate = useNavigate();
@@ -51,16 +52,19 @@ function Search({ hide }) {
       {hits.length !== 0 &&
         hits.map(hit => (
           <div
-            key={hit._id}
-            className="border-b border-blue-500 bg-white min-h-[5vh] cursor-pointer"
+            key={Math.random().toString().concat(hit._id)}
+            className="border-b flex border-blue-500 bg-white min-h-[5vh] cursor-pointer"
             onClick={() => {
-              navigate(`/permission/${hit._id}`);
+              navigate(`/product/${hit._id}`);
               window.location.reload();
             }}
           >
-            <p className="text-lg">{hit.studentNames}</p>
-            <p className="text-xs">{hit.returnDate}</p>
-            <p className="text-xs">{hit.reason}</p>
+            <img src={buildImage(hit.productImage.asset._ref)} className='h-[5vh] w-12 rounded-md' alt="" />
+            <div>
+              <p className="text-lg">{hit.productName}</p>
+              <p className="text-xs">${hit.productPrice}</p>
+              <p className="text-xs">{hit.reason}</p>
+            </div>
           </div>
         ))}
       {hits.length == 0 && <p>No results found</p>}

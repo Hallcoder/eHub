@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Item from "./Item";
 function Cart() {
   let cart = useSelector(state => state);
-  console.log(cart.products);
   return (
     <div className="w-full flex flex-col text-xs bg-white h-full shadow-2xl z-[1] overflow-scroll">
       <h1 className="text-lg  text-center font-bold">My Cart</h1>

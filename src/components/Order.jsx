@@ -1,7 +1,10 @@
 import React from 'react';
 function OrderPopup() {
     return ( 
-        <div>   </div>
+        <div>
+            <h1>Order Details</h1>
+            
+        </div>
      );
 }
 

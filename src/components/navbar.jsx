@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
 import { MdMenu, MdOutlineShoppingCart } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { createAction } from "../redux/actionCreator";
+import { RESET_NEW_ITEMS } from "../redux/actionTypes";
 
 import Cart from "./Cart";
 import Input from "./input";
 import Search from "./search";
 function NavBar() {
+  let cart = useSelector(state => state);
+  let dispatch = useDispatch();
+  let [newCount,setNewCount] = useState(0);
+  useEffect(() => {
+   setNewCount(cart.newItems);
+  },[cart.newItems])
+
   const [style, setStyle] = useState({
     display: "none",
   });
+
   const [showSearch,setShowSearch] = useState({
     display: "none",
   });
@@ -24,6 +35,7 @@ function NavBar() {
   const handleShowCart = () => {
     if (style.display == "none") {
       setStyle({ display: "flex" });
+      dispatch(createAction(RESET_NEW_ITEMS));
       return;
     }
     setStyle({ display: "none" });
@@ -44,6 +56,7 @@ const navigate = useNavigate();
       </div>
       <div className="sm:flex hidden">
         <MdOutlineShoppingCart className={iconClass} onClick={handleShowCart} />
+       {newCount > 0 && <div className="h-4 w-4 text-center relative right-2  rounded-md bg-red-500 text-white text-xs">{newCount}</div>}
       </div>
       <div style={style} className="absolute right-0 top-14 w-4/12 h-screen">
         <Cart />
