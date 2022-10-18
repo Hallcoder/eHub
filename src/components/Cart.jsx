@@ -9,7 +9,6 @@ function Cart() {
       {cart &&
         cart.products.length !== 0 &&
         cart.products.map(pr => {
-          console.log(pr);
           return (
             <Item
               price={pr.product.productPrice}
