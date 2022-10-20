@@ -42,28 +42,34 @@ function NavBar() {
     return;
   };
 const navigate = useNavigate();
-  const iconClass = "text-2xl";
+  const iconClass = "text-2xl m-2";
   return (
     <div className="fixed top-0 z-1 h-[8vh] bg-white hover:cursor-pointer flex w-full items-center justify-between border-b shadow-md">
       <div>
         <h1 className="text-2xl m-2 text-blue-600" onClick={() => navigate('/') }>eDandaza</h1>
       </div>
-      <div>
-        <Input placeholder={"Search a product..."} onFocus={() => handleShowSearch()} />
+
+      <div className="flex items-center w-2/12">
+        <div>
+          <Input placeholder={"Search a product..."} onFocus={() => handleShowSearch()} />
+        </div>
+        <div className="sm:hidden">
+          <MdMenu className={iconClass} />
+        </div>
+        <div>
+          <button className="bg-blue-600 m-auto px-4 py-2 text-white rounded-sm" onClick={() => navigate('/post') }>Post</button>
+        </div>
+        <div className="sm:flex hidden ">
+          <MdOutlineShoppingCart className={iconClass} onClick={handleShowCart} />
+         {newCount > 0 && <div className="h-4 w-4 text-center relative right-2  rounded-md bg-red-500 text-white text-xs">{newCount}</div>}
+        </div>
+        <div style={style} className="absolute right-0 top-14 w-4/12 h-screen">
+          <Cart />
+        </div>
+        <div style={showSearch} className='fixed top-0 bg-opacity-40 w-full left-0 shadow-xl min-h-screen bg-black'>
+             <Search hide={handleShowSearch}/>
+             </div>
       </div>
-      <div className="sm:hidden">
-        <MdMenu className={iconClass} />
-      </div>
-      <div className="sm:flex hidden">
-        <MdOutlineShoppingCart className={iconClass} onClick={handleShowCart} />
-       {newCount > 0 && <div className="h-4 w-4 text-center relative right-2  rounded-md bg-red-500 text-white text-xs">{newCount}</div>}
-      </div>
-      <div style={style} className="absolute right-0 top-14 w-4/12 h-screen">
-        <Cart />
-      </div>
-      <div style={showSearch} className='h-screen w-full  items-center justify-center absolute bg-black bg-opacity-60 top-0 p-24  shadow-xl shadow-black'>
-           <Search hide={handleShowSearch}/>
-           </div>
     </div>
   );
 }

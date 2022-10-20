@@ -8,6 +8,7 @@ import ProductPage from "./pages/productPage";
 import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
 import "./index.css";
+import PostProduct from "./pages/post";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <Router>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Routes>
             <Route index element={<HomePage />}></Route>
             <Route path="/product/:id" element={<ProductPage />}></Route>
+            <Route path="/post" element={<PostProduct />}></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </PersistGate>

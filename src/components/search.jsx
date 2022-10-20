@@ -72,7 +72,7 @@ function Search({ hide }) {
   );
   const CustomHits = connectHits(Hits);
   return (
-    <div className="sm:h-[75vh] sm:w-9/12  border-blue-500 p-1 rounded-md bg-white absolute border bg-opacity-90">
+    <div className="sm:h-[75vh] sm:w-9/12  border-blue-500 m-auto rounded-md bg-white  border bg-opacity-90">
       <MdClose
         className="w-1/12 m-2 h-10 border rounded-full float-right"
         onClick={() => hide()}

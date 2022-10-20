@@ -64,7 +64,7 @@ function ProductPage() {
         >
           <div>
             <img
-              src={buildImage(product.productImage.asset._ref).url()}
+              src={product.productImage.asset ? buildImage(product.productImage.asset._ref).url():product.productImage}
               alt=""
               className="ml-2 mt-2"
             />
@@ -118,7 +118,7 @@ function ProductPage() {
                     <ProductCard
                       key={prod._id}
                       productName={prod.productName}
-                      image={buildImage(prod.productImage.asset._ref)}
+                      image={prod.productImage.asset ? buildImage(prod.productImage.asset._ref).url(): prod.productImage}
                       id={prod._id}
                       manufacturer={prod.manufacturer}
                     />
@@ -138,7 +138,7 @@ function ProductPage() {
           )}
         </div>
         <div style={popupVisible} className="h-screen w-full  items-center justify-center fixed bg-black bg-opacity-60 top-0 p-28  shadow-xl shadow-black">
-          <OrderPopup close={handleShowPopup}  image={buildImage(product.productImage.asset._ref)} name={product.productName} price={product.productPrice} desc={product.productDescription}/>
+          <OrderPopup close={handleShowPopup}  image={product.productImage.asset ? buildImage(product.productImage.asset._ref).url():product.productImage} name={product.productName} price={product.productPrice} desc={product.productDescription}/>
         </div>
       </div>
     ) : (

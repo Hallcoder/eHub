@@ -50,7 +50,7 @@ function HomePage() {
      <h1 className={headerClass}>Trending Products</h1>
      <div className="items-center justify-center flex flex-wrap w-11/12 gap-4 m-auto">
          {JSON.parse(localStorage.getItem('products')).length !== 0 && JSON.parse(localStorage.getItem('products')).map(prod => {
-           return <ProductCard  productName={prod.productName} image={buildImage(prod.productImage.asset._ref).url()} id={prod._id} manufacturer={prod.manufacturer}/>
+           return <ProductCard  productName={prod.productName} image={prod.productImage.asset ? buildImage(prod.productImage.asset._ref).url(): prod.productImage} id={prod._id} manufacturer={prod.manufacturer}/>
          })}
      </div>
    </section>
