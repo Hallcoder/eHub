@@ -33,7 +33,7 @@ function OrderPopup({ image, desc, price, name, close }) {
       {buy && (
         <div>
           <div className="w-full flex items-center flex-col p-2">
-            <img src={image} alt="Product"></img>
+            <img src={image} alt="Product" className='h-[25vh]'></img>
             <h1 className={headerClass}>{name}</h1>
             <h3>{count * price}</h3>
             <Counter

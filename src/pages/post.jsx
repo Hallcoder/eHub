@@ -3,14 +3,17 @@ import Input from "../components/input";
 import NavBar from "../components/navbar";
 import { handleChange } from "../../lib/handleChange";
 import { MdEdit, MdOutlineCameraAlt } from "react-icons/md";
-import sanityClient  from '@sanity/client';
+import sanityClient from "@sanity/client";
+import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { headerClass } from "../constants";
 function PostProduct() {
-  const [image, setimage] = useState('');
+  const [image, setimage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const setImage = e => {
     let file = e.target.files[0];
-    console.log(file)
+    console.log(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
@@ -32,38 +35,39 @@ function PostProduct() {
     useCdn: false,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log('Submit');
+    setLoading(true);
     const doc = {
-      _type:'product',
-      productName:product.productName,
-      productPrice:product.productPrice,
-      productDescription:product.productDescription,
-      productImage:image
+      _type: "product",
+      productName: product.productName,
+      productPrice: product.productPrice,
+      productDescription: product.productDescription,
+      productImage: image,
     };
-    client.create(doc).then((res) => {
+    client.create(doc).then(res => {
       console.log(res);
-    })
-  }
+      setLoading(false);
+      navigate(`/product/${res._id}`);
+    });
+  };
   return (
     <div>
       <NavBar />
       <form className="w-4/12 m-auto mt-[10vh] sm:flex flex-col flex justify-center border ">
-    <h1 className={headerClass}>Upload and sell your product</h1>
-        <div className='w-full m-4'>
+        <h1 className={headerClass}>Upload and sell your product</h1>
+        <div className="w-full m-4">
           <TextField
-          name={"productName"}
-          placeholder={"Enter the product name..."}
-          value={product.productName}
-          onChange={e => handleChange(e, setProduct, product)}
-          label="Product Name"
-          className={
-            " w-9/12 indent-4 focus:outline-blue-400 rounded-md "
-          }
-          type="text"/>
+            name={"productName"}
+            placeholder={"Enter the product name..."}
+            value={product.productName}
+            onChange={e => handleChange(e, setProduct, product)}
+            label="Product Name"
+            className={" w-9/12 indent-4 focus:outline-blue-400 rounded-md "}
+            type="text"
+          />
         </div>
-        <div className='w-full m-4'>
+        <div className="w-full m-4">
           <TextField
             name={"productPrice"}
             placeholder={"Enter the product price..."}
@@ -76,7 +80,7 @@ function PostProduct() {
             type="number"
           />
         </div>
-        <div className='w-full m-4'>
+        <div className="w-full m-4">
           <TextField
             name={"productDescription"}
             placeholder={"Enter a short description about the product..."}
@@ -90,7 +94,7 @@ function PostProduct() {
           />
         </div>
         <h1 className="font-bold text-2xl text-center">Add an Image</h1>
-        <div 
+        <div
           id="image"
           style={{ backgroundImage: `url(${image})` }}
           className="rounded-full flex m-auto max-w-fit bg-gray-200 text-white"
@@ -111,7 +115,7 @@ function PostProduct() {
           className="bg-blue-600 text-white w-4/12 p-3 rounded-sm m-auto mt-2 mb-2"
           onClick={handleSubmit}
         >
-          Post Product
+          {loading ? "..." : "Post"}
         </button>
       </form>
     </div>
