@@ -10,6 +10,11 @@ function HomePage() {
   const  [categories,setCategories] = useState();
   const [isloading,setLoading] = useState(true);
   useEffect(() =>{
+    setTimeout(() => {
+      console.log('Set time out!');
+           setLoading(false);
+           console.log(isloading);
+    },1000)
     const Pquery = '*[_type == "product" ]';
     const Cquery= '*[_type == "category" ]';
     client.fetch(Pquery,{})
